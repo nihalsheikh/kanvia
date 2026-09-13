@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Backend for the AI-powered Kanban board (PERN + Socket.IO + Gemini)",
   "main": "index.js",
-  "types": "module",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "db:init": "node src/db/init.js",
-    "db:seed": "node src/db/seed.js"
+    "db:init": "node db/init.js",
+    "db:seed": "node db/seed.js"
   },
   "keywords": [
     "kanban",
