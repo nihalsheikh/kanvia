@@ -1,11 +1,13 @@
 import express from "express";
 import cors from "cors";
+import http from "http";
 import { env } from "./config/envConfig.js";
 import apiRoutes from "./routes/index.routes.js";
 import {
   errorHandler,
   notFoundHandler,
 } from "./middleware/errorHandler.middleware.js";
+import { initSocket } from "./socket/index.socket.js";
 
 const app = express();
 
@@ -28,8 +30,13 @@ app.use("/api", apiRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(env.port, () => {
-  console.log(`Server running in ${env.nodeEnv} mode on port ${env.port}`);
+const server = http.createServer(app);
+initSocket(server);
+
+server.listen(env.port, () => {
+  console.log(
+    `API and Socket.IO running in ${env.nodeEnv} mode on port ${env.port}`,
+  );
 });
 
 export default app;
